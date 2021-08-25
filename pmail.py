@@ -21,7 +21,7 @@ class Mail:
         server = None
         
         if (re.search(r"^([pPsS])",host)):
-            server = '10.120.112.123'
+            server = 'prod network'
         else:
             server = 'localhost' 
         
@@ -58,7 +58,7 @@ class Mail:
         server = None
         
         if (re.search(r"^([pPsS])",host)):
-            server = '10.120.112.123'
+            server = 'prod network'
         else:
             server = 'localhost' 
             
