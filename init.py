@@ -12,7 +12,7 @@ from oracle import Oracle
 
 
     init class is a base class that inherits from other system functions
-    from a clearing perspective as follows:
+    --------------------------------------------------------------------
     
     from init import Init
     
