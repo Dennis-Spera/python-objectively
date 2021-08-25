@@ -34,7 +34,7 @@ class Oracle:
         reading = False
         m = None
         
-        fh = open('/apps/clearing/pdir/ositeroot/cfg/istparam.cfg')
+        fh = open('param.cfg')
         for line in fh:   
         
            if (re.search(r"(GROUP DATABASE)",line)):
