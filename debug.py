@@ -16,7 +16,7 @@ class Debug:
        self.loggingLevel = 6
        self.traceOutput = 'un-defined'
        
-       file='/apps/clearing/pdir/log/debug/console.log'
+       file='console.log'
        self.logger = logging.getLogger(__name__)
        self.logger.setLevel(logging.INFO)
        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
