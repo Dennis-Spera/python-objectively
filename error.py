@@ -47,7 +47,7 @@ class Error():
             domain = 'planetpayment.com'      
         
         if notify == 'mail':
-           self._sendSimpleMail( host + '@' + domain, 'dennis.spera@planetpayment.com', '!! ' + host + ' - ' + error_text, error_code)
+           self._sendSimpleMail( host + '@' + domain, 'system email account', '!! ' + host + ' - ' + error_text, error_code)
            
            
         if disposition == 'terminate':
