@@ -26,13 +26,13 @@ class Settings:
 
        '''
         
-       self.prodMailServer = '10.120.112.123'
+       self.prodMailServer = ???????
        self.testMailserver = 'localhost' 
        
-       self.notificationGroup = 'dennis.spera@planetpayment.com'
-       self.serverConfig = '/apps/clearing/pdir/ositeroot/cfg/istparam.cfg'
+       self.notificationGroup = ??????
+       self.serverConfig = ????????
        
-       self.username = 'clradmin'  
+       self.username = ???????
        self.passwordToken = 'dbm.dbpassword'
        self.tnsToken = 'dbm.dbname'
        self.encodingToken = 'utf-8'
