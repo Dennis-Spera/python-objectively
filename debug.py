@@ -1,8 +1,23 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#----------------------------------------------------------------------
+# Name: 
+# Purpose: clearing debug class
+#
+# Author:      Dennis Spera
+#
+# Created:     12-June-2018
+# RCS-ID:      $Id: $
+# Copyright:   (c) 2021 
+# Licence:     apache
+#
+#
+#----------------------------------------------------------------------
 import traceback, re, sys, os
 import pprint, time
 import cx_Oracle
 from tabulate import tabulate
-from inspect import currentframe, getframeinfo
+from inspect import currentframe, getframeinfo, getouterframes
 import logging, logging.handlers
 
 
@@ -12,23 +27,22 @@ class Debug:
        '''
 
        '''
-       self.trace = False
-       self.loggingLevel = 6
-       self.traceOutput = 'un-defined'
        
-       file='console.log'
-       self.logger = logging.getLogger(__name__)
-       self.logger.setLevel(logging.INFO)
-       formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-       handler = logging.handlers.RotatingFileHandler( file, maxBytes=1048576, backupCount=5)
-       handler.setFormatter(formatter)
-       self.logger.addHandler(handler)
        
-    
-    
     def _trace(self, text, tabs=0, level=0, severity='info'):
          cf = currentframe()
-
+         calframe = getouterframes(cf, 2)        
+         
+         logger = self._setLoggingFile()
+         
+         
+         try:
+           if self.traceOutput == 'un-defined':       
+              pass
+         except:
+              print ('traceOutput not set defaulting to terminal and loggingLevel of 5')
+              self.traceOutput = 'terminal'
+              self.loggingLevel = 5
          
          if self.traceOutput == 'un-defined':
             self._error(self._errors['error_002'], 
@@ -57,8 +71,6 @@ class Debug:
                        sys._getframe().f_code.co_name, 
                        'terminate', 
                        notify='void') 
-
-
         
          if self.traceOutput == 'terminal' or self.traceOutput == 'both':
             
@@ -66,21 +78,33 @@ class Debug:
                  
               for i in range(1,tabs+1): 
                   print ("\t",end='')
-              print ('% '+str(text))
-
+              print ('% ' +  str(os.path.basename(calframe[1][1]))  + '[' + str(calframe[1][2]) + '] : ' + str(text) )
+              
+              
               
          if self.traceOutput == 'file' or self.traceOutput == 'both':
             
             if level < self.loggingLevel:  
-               optStr = 'self.logger.setLevel(logging.' + severity.upper() + ')'
+               optStr = 'logger.setLevel(logging.' + severity.upper() + ')'
                eval(optStr)         
-               cmdStr =  'self.logger.' + severity + '(str(text))'               
+               cmdStr =  'logger.' + severity + '(str(text))'               
                eval(cmdStr)   
-               # set abck to default of INFO
-               self.logger.setLevel(logging.INFO)
+               # set back to default of INFO
+               logger.setLevel(logging.INFO)
 
     def _setLoggingLevel(self, level=0):             
         self.loggingLevel = level
+        
+        
+    def _setLoggingFile (self):
+        file='/apps/clearing/pdir/log/debug/console.log'
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        handler = logging.handlers.RotatingFileHandler( file, maxBytes=1048576, backupCount=5)
+        handler.setFormatter(formatter)
+        self.logger.addHandler(handler)
+        return self.logger    
         
     def _enableTracing(self):             
         self.trace = True

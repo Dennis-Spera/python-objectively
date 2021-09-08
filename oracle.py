@@ -16,15 +16,14 @@ class Oracle:
          dbh = obj._dbh()
          
          user handle for executing query
-       '''
-
+       '''    
 
     def _dbh(self):
        d = self._get_tuple()
-       self.username = 'clradmin'  
-       self.password = d['dbm.dbpassword']
-       self.tnsname = d['dbm.dbname']
-       self.encoding = 'utf-8'
+       
+       self.password = d[self.passwordToken]
+       self.tnsname = d[self.tnsToken]
+       self.encoding = self.encodingToken
        dh = cx_Oracle.connect(self.username, self.password, self.tnsname, encoding=self.encoding)
        return dh
     
@@ -34,7 +33,7 @@ class Oracle:
         reading = False
         m = None
         
-        fh = open('param.cfg')
+        fh = open(self.serverConfig)
         for line in fh:   
         
            if (re.search(r"(GROUP DATABASE)",line)):

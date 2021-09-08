@@ -1,3 +1,18 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#----------------------------------------------------------------------
+# Name: 
+# Purpose: clearing email class
+#
+# Author:      Dennis Spera
+#
+# Created:     12-June-2018
+# RCS-ID:      $Id: $
+# Copyright:   (c) 2021 
+# Licence:     apache
+#
+#
+#----------------------------------------------------------------------
 import traceback, re, sys, os
 import pprint, time
 import cx_Oracle
@@ -14,17 +29,20 @@ class Mail:
     
     '''
     '''
+    def __init__(self):
+       '''
+
+       '''
+    
     def _sendMailAttachment(self, send_from, send_to, subject, text, file):
-        
         
         host = socket.gethostname()
         server = None
         
         if (re.search(r"^([pPsS])",host)):
-            server = 'prod network'
+            server = self.prodMailServer
         else:
-            server = 'localhost' 
-        
+            server = self.testMailserver 
 
         msg = MIMEMultipart()
         msg['From'] = send_from
@@ -58,9 +76,9 @@ class Mail:
         server = None
         
         if (re.search(r"^([pPsS])",host)):
-            server = 'prod network'
+            server = self.prodMailServer
         else:
-            server = 'localhost' 
+            server = self.testMailserver 
             
         msg = MIMEMultipart()
         msg['From'] = send_from
