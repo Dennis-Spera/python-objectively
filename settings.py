@@ -40,7 +40,7 @@ class Settings:
     @staticmethod   
     def _fisRelease():
         
-        output = os.popen('ls -alt /apps/clearing/pdir')
+        output = os.popen('ls -alt ???')
         line = output.readline()
         line = line.rstrip()
         _null, _file = line.split('>')
