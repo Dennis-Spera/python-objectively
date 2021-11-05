@@ -33,8 +33,8 @@ class Settings:
        self.serverConfig = ????????
        
        self.username = ???????
-       self.passwordToken = 'dbm.dbpassword'
-       self.tnsToken = 'dbm.dbname'
+       self.passwordToken = '???'
+       self.tnsToken = '???'
        self.encodingToken = 'utf-8'
        
     @staticmethod   
