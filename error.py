@@ -59,9 +59,9 @@ class Error():
         domain = None
         
         if (re.search(r"^([pPsS])",host)):
-            domain = 'planetpayment.net'
+            domain = '?????'
         else:
-            domain = 'planetpayment.com'      
+            domain = '?????'      
         
         if notify == 'mail':
            self._sendSimpleMail( host + '@' + domain, self.notificationGroup, '!! ' + host + ' - ' + error_text, error_code)
