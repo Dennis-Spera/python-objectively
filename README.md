@@ -8,7 +8,9 @@ functionality
 
 
 this section of code is designed to cause all __init__
-functions to be executed when init is instantiated
+functions for each subclass when init the class is instantiated
+essentially making all subclasses appear as both inherited and
+instantiated.
 
 
         classesTuple = Init.__mro__
